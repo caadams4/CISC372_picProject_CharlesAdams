@@ -57,12 +57,17 @@ uint8_t getPixelValue(Image* srcImage,int x,int y,int bit,Matrix algorithm){
 //            algorithm: The kernel matrix to use for the convolution
 //Returns: Nothing
 void convolute(Image* srcImage,Image* destImage,Matrix algorithm){
-    int row,pix,bit,span;
+	long count = 0;    
+int row,pix,bit,span;
     span=srcImage->bpp*srcImage->bpp;
     for (row=0;row<srcImage->height;row++){
-        for (pix=0;pix<srcImage->width;pix++){
-            for (bit=0;bit<srcImage->bpp;bit++){
-                destImage->data[Index(pix,row,srcImage->width,bit,srcImage->bpp)]=getPixelValue(srcImage,pix,row,bit,algorithm);
+puts("BRICK");    
+    for (pix=0;pix<srcImage->width;pix++){
+puts("SQUAD");            
+for (bit=0;bit<srcImage->bpp;bit++){
+	count++;
+	printf("copunt: %i",count);                
+destImage->data[Index(pix,row,srcImage->width,bit,srcImage->bpp)]=getPixelValue(srcImage,pix,row,bit,algorithm);
             }
         }
     }

@@ -11,12 +11,20 @@ typedef struct{
     int bpp;
 } Image;
 
-enum KernelTypes{EDGE=0,SHARPEN=1,BLUR=2,GAUSE_BLUR=3,EMBOSS=4,IDENTITY=5};
-
 typedef double Matrix[3][3];
 
+enum KernelTypes{EDGE=0,SHARPEN=1,BLUR=2,GAUSE_BLUR=3,EMBOSS=4,IDENTITY=5};
+
+typedef struct{
+    int thread;
+    Image *srcImage;
+    Image *destImage;
+    enum KernelTypes type;
+} Thing;
+
+
 uint8_t getPixelValue(Image* srcImage,int x,int y,int bit,Matrix algorithm);
-void convolute(Image* srcImage,Image* destImage,Matrix algorithm);
+void convolute(void* i_am_thread);
 int Usage();
 enum KernelTypes GetKernelType(char* type);
 
